@@ -1,0 +1,83 @@
+{
+    "input": "OID:1.3.6.1.2.1.1.1",
+    "regx": "^\\w+",
+    "next": {
+        "Baidu": {
+            "input": "$PRE_INPUT",
+            "regx": "Product name (\\w+)",
+            "record": {
+                "vendor": "BAIDU",
+                "model": "$RE_RST"
+            }
+        },
+        "Cisco": {
+            "record": {
+                "vendor": "CISCO",
+                "model": "UNKNOW"
+            }
+        },
+        "H3C": {
+            "input": "$PRE_INPUT",
+            "regx": "\\nH3C ([\\w-]+)",
+            "record": {
+                "vendor": "H3C"
+            },
+            "next": {
+                "SecPath": {
+                    "input": "$PRE_INPUT",
+                    "regx": "\\nH3C SecPath ([\\w-]+)",
+                    "record": {
+                        "model": "$RE_RST"
+                    }
+                },
+                "*": {
+                    "record": {
+                        "model": "$KEY"
+                    }
+                }
+            }
+        },
+        "Huawei": {
+            "input": "$PRE_INPUT",
+            "regx": "\\(([^ ]+) V",
+            "record": {
+                "vendor": "HUAWEI",
+                "model": "$RE_RST"
+            }
+        },
+        "Juniper": {
+            "input": "$PRE_INPUT",
+            "regx": "Inc. ([\\w-]+) ",
+            "record": {
+                "vendor": "JUNIPER",
+                "model": "$RE_RST"
+            }
+        },
+        "Mellanox": {
+            "record": {
+                "vendor": "MELLANOX",
+                "model": "MSN2700"
+            }
+        },
+        "Ruijie": {
+            "input": "$PRE_INPUT",
+            "regx": "Switch\\(([^\\)]+)\\)",
+            "record": {
+                "vendor": "RUIJIE",
+                "model": "$RE_RST"
+            }
+        },
+        "S5720": {
+            "record": {
+                "vendor": "HUAWEI",
+                "model": "S5720"
+            }
+        },
+        "*": {
+            "record": {
+                "vendor": "UNKNOW",
+                "model": "UNKNOW"
+            }
+        }
+    }
+}
